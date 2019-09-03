@@ -17,7 +17,7 @@ let shuffle = require("shuffle-array");
 let client_id = "3314e4c1f4924ab68ecb243b7db6c0ff"; // Your client id
 let client_secret = "056b0ce4f1c345ab8c046621fd9d7e60"; // Your secret
 //let redirect_uri = "REDIRECT_URI"; // Your redirect uri
-let redirect_uri = "http://localhost:8080/callback"; // for testing
+let redirect_uri = "https://spotify-playlist-mixer.herokuapp.com/callback"; // for testing
 
 const PORT = process.env.PORT || 8080;
 

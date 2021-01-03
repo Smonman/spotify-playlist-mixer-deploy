@@ -145,7 +145,7 @@ function removeToSelectedPlaylistIDs(id) {
     }
 }
 
-function afterLogin(access_token) {
+async function afterLogin(access_token) {
     console.log("After login");
     let playlists = await getUserPlaylists(access_token);
 

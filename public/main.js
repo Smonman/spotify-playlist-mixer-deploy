@@ -245,6 +245,10 @@ function displayPlaylists(playlists, user) {
     let playlistPlaceholder = document.getElementById("playlist-placeholder-" + user.id);
 
     for (const p of playlists) {
+        if (p.id == null) {
+            continue;
+        }
+
         p.user = user;
         temp.innerHTML = playlistTemplate(p).trim();
         playlistPlaceholder.append(temp.content);

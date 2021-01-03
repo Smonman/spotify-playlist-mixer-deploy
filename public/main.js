@@ -147,7 +147,11 @@ function removeToSelectedPlaylistIDs(id) {
 
 function afterLogin(access_token) {
     console.log("After login");
-    getUserPlaylists(access_token);
+    let playlists = getUserPlaylists(access_token);
+
+    console.log("User does not have any more playlists");
+    console.log("Promise resolved");
+    displayPlaylists(playlists, curLoggedInUser);
 }
 
 function getUserPlaylists(access_token, url) {
@@ -175,11 +179,9 @@ function getUserPlaylists(access_token, url) {
 
             if (response.next) {
                 console.log("User has more playlists.");
-                getUserPlaylists(access_token, response.next);
+                playlists.push(getUserPlaylists(access_token, response.next));
             } else {
-                console.log("User does not have any more playlists");
-                console.log("Promise resolved");
-                displayPlaylists(playlists, curLoggedInUser);
+                return playlists;
             }
         },
         error: function(response) {

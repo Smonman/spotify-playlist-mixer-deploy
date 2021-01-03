@@ -53,7 +53,7 @@ function start(access_token_callback) {
                 error: function(response) {
                     if (response.status == 401) {
                         let temp = getNewAccessToken(refresh_token);
-                        console.log(temp);
+                        //console.log(temp);
                         //start(temp.access_token);
                     }
                 }
@@ -114,7 +114,7 @@ async function getNewAccessToken(refresh_token) {
         }
     }).done(function(data) {
 
-        console.log(data);
+        //console.log(data);
 
         access_token = data.access_token;
         curAccessToken = access_token;
@@ -208,6 +208,9 @@ function getPlaylist(access_token, id) {
 }
 
 function displayPlaylists(playlists, user) {
+
+    console.log("Generating playlist display");
+
     let temp = document.createElement("template");
 
     let playlistContainerSource = document.getElementById("playlist-container-template").innerHTML,

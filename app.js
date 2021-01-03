@@ -15,8 +15,8 @@ let cookieParser = require("cookie-parser");
 let shuffle = require("shuffle-array");
 require("dotenv");
 
-let client_id = process.env.CLIENT_ID; //"3314e4c1f4924ab68ecb243b7db6c0ff"; // Your client id
-let client_secret = process.env.CLIENT_SECRET; //"056b0ce4f1c345ab8c046621fd9d7e60"; // Your secret
+let client_id = process.env.CLIENT_ID;
+let client_secret = process.env.CLIENT_SECRET;
 //let redirect_uri = "REDIRECT_URI"; // Your redirect uri
 let redirect_uri = "https://spotify-playlist-mixer.herokuapp.com/callback"; // for testing
 

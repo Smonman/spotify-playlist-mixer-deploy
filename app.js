@@ -20,7 +20,7 @@ let client_secret = process.env.CLIENT_SECRET;
 //let redirect_uri = "REDIRECT_URI"; // Your redirect uri
 let redirect_uri = "https://spotify-playlist-mixer.herokuapp.com/callback"; // for testing
 
-//const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 /**
  * Generates a random string containing numbers and letters

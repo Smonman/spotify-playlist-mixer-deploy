@@ -147,47 +147,50 @@ function removeToSelectedPlaylistIDs(id) {
 
 function afterLogin(access_token) {
     console.log("After login");
-    let playlists = getUserPlaylists(access_token);
+    let playlists = await getUserPlaylists(access_token);
 
     console.log("User does not have any more playlists");
     console.log("Promise resolved");
+
     displayPlaylists(playlists, curLoggedInUser);
 }
 
 function getUserPlaylists(access_token, url) {
+    return new Promise((resolve, reject) => {
+        console.log("Get User Playlists");
 
-    console.log("Get User Playlists");
-
-    if (!url) {
-        url = "https://api.spotify.com/v1/me/playlists?limit=50";
-    }
-
-    let playlists = [];
-
-    $.ajax({
-        url: url,
-        headers: {
-            "Authorization": "Bearer " + access_token
-        },
-        success: async function(response) {
-            for (let i = 0; i < response.items.length; i++) {
-                const playlist = response.items[i];
-
-                let temp = await getPlaylist(access_token, playlist.id);
-                playlists.push(temp);
-            }
-
-            if (response.next) {
-                console.log("User has more playlists.");
-                playlists.push(getUserPlaylists(access_token, response.next));
-            } else {
-                return playlists;
-            }
-        },
-        error: function(response) {
-            console.log("An error occured while loading in the user playlists.");
+        if (!url) {
+            url = "https://api.spotify.com/v1/me/playlists?limit=50";
         }
-    });
+
+        let playlists = [];
+
+        $.ajax({
+            url: url,
+            headers: {
+                "Authorization": "Bearer " + access_token
+            },
+            success: async function(response) {
+                for (let i = 0; i < response.items.length; i++) {
+                    const playlist = response.items[i];
+
+                    let temp = await getPlaylist(access_token, playlist.id);
+                    playlists.push(temp);
+                }
+
+                if (response.next) {
+                    console.log("User has more playlists.");
+                    let temp = await getUserPlaylists(access_token, response.next);
+                    playlists.push(temp);
+                } else {
+                    resolve(playlists);
+                }
+            },
+            error: function(response) {
+                console.log("An error occured while loading in the user playlists.");
+            }
+        });
+    })
 }
 
 function getPlaylist(access_token, id) {

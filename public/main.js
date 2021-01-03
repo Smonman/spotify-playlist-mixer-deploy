@@ -47,6 +47,8 @@ function start(access_token_callback) {
                     loadedUsers.push(response.id);
                     $("#login").hide();
                     $("#loggedin").show();
+
+                    afterLogin(access_token);
                 },
                 error: function(response) {
                     if (response.status == 401) {
@@ -56,8 +58,6 @@ function start(access_token_callback) {
                     }
                 }
             });
-
-            afterLogin(access_token);
         } else {
             // render initial screen
             $("#login").show();

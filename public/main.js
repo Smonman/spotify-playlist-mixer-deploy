@@ -146,10 +146,14 @@ function removeToSelectedPlaylistIDs(id) {
 }
 
 function afterLogin(access_token) {
+    console.log("After login");
     getUserPlaylists(access_token);
 }
 
 function getUserPlaylists(access_token, url) {
+
+    console.log("Get User Playlists");
+
     if (!url) {
         url = "https://api.spotify.com/v1/me/playlists?limit=50";
     }

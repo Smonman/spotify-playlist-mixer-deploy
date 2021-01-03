@@ -175,14 +175,19 @@ function getUserPlaylists(access_token, url) {
                     const playlist = response.items[i];
 
                     let temp = await getPlaylist(access_token, playlist.id);
-                    playlists.push(temp);
+                    if (temp != null) {
+                        playlists.push(temp);
+                    }
                 }
 
                 if (response.next) {
                     console.log("User has more playlists.");
                     let temp = await getUserPlaylists(access_token, response.next);
                     console.log("got the next user playlists");
-                    playlists.push(temp);
+
+                    if (temp != null) {
+                        playlists.push(temp);
+                    }
                 }
 
                 console.log("Resolving getUserPlaylists");
@@ -216,7 +221,8 @@ function getPlaylist(access_token, id) {
         p.then((result) => {
             resolve(playlist);
         }).catch((error) => {
-            reject(error);
+            console.log("An error occured while loading in a playlist.");
+            reject(null);
         });
     });
 }

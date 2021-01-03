@@ -183,10 +183,10 @@ function getUserPlaylists(access_token, url) {
                     let temp = await getUserPlaylists(access_token, response.next);
                     console.log("got the next user playlists");
                     playlists.push(temp);
-
-                    console.log("Resolving getUserPlaylists");
-                    resolve(playlists);
                 }
+
+                console.log("Resolving getUserPlaylists");
+                resolve(playlists);
             },
             error: function(response) {
                 console.log("An error occured while loading in the user playlists.");

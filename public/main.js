@@ -174,11 +174,13 @@ function getUserPlaylists(access_token, url) {
             }
 
             if (response.next) {
+                console.log("User has more playlists.");
                 getUserPlaylists(access_token, response.next);
+            } else {
+                console.log("User does not have any more playlists");
+                console.log("Promise resolved");
+                displayPlaylists(playlists, curLoggedInUser);
             }
-
-            console.log("Promise resolved");
-            displayPlaylists(playlists, curLoggedInUser);
         },
         error: function(response) {
             console.log("An error occured while loading in the user playlists.");
